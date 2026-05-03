@@ -11,8 +11,8 @@ export default async function Nav() {
 
   return (
     <div className="sticky top-0 inset-x-0 z-50 group">
-      <header className="relative h-16 mx-auto border-b duration-200 bg-white border-ui-border-base">
-        <nav className="content-container txt-xsmall-plus text-ui-fg-subtle flex items-center justify-between w-full h-full text-small-regular">
+      <header className="relative h-16 mx-auto border-b duration-200 border-ui-border-base" style={{ backgroundColor: '#FFFAF5' }}>
+        <nav className="content-container txt-xsmall-plus text-ui-fg-subtle flex items-center justify-between w-full h-full text-small-regular" style={{ backgroundColor: '#FFFAF5' }}>
           <div className="flex-1 basis-0 h-full flex items-center">
             <div className="h-full">
               <SideMenu regions={regions} />
@@ -25,7 +25,7 @@ export default async function Nav() {
               className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase"
               data-testid="nav-store-link"
             >
-              Medusa Store
+              <span className="font-serif tracking-wide" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: '1.25rem', letterSpacing: '0.15em', color: '#8B6914' }}>Charm Project</span>
             </LocalizedClientLink>
           </div>
 

@@ -6,9 +6,9 @@ import { getCollectionsWithProducts } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 
 export const metadata: Metadata = {
-  title: "Medusa Next.js Starter Template",
+  title: "Charm Project | Charm Your Way",
   description:
-    "A performant frontend ecommerce starter template with Next.js 14 and Medusa.",
+    "Discover beautifully crafted sterling silver charms, hand-enameled designs, and Murano-style glass beads. Curated collection compatible with all European-style bracelets.",
 }
 
 export default async function Home({
