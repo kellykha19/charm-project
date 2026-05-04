@@ -41,23 +41,49 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
   )
 }
 
+const COUNTRY_MAP: Record<string, string> = {
+  cn: "China",
+  us: "United States",
+  gb: "United Kingdom",
+  de: "Germany",
+  it: "Italy",
+  fr: "France",
+  th: "Thailand",
+  in: "India",
+}
+
 const ProductInfoTab = ({ product }: ProductTabsProps) => {
+  const countryName = product.origin_country
+    ? COUNTRY_MAP[product.origin_country.toLowerCase()] || product.origin_country.toUpperCase()
+    : "-"
+
+  const categories = (product as any).categories as
+    | { name: string }[]
+    | undefined
+  const tags = (product as any).tags as { value: string }[] | undefined
+
   return (
     <div className="text-small-regular py-8">
       <div className="grid grid-cols-2 gap-x-8">
         <div className="flex flex-col gap-y-4">
           <div>
             <span className="font-semibold">Material</span>
-            <p>{product.material ? product.material : "-"}</p>
+            <p>{product.material || "-"}</p>
           </div>
           <div>
-            <span className="font-semibold">Country of origin</span>
-            <p>{product.origin_country ? product.origin_country : "-"}</p>
+            <span className="font-semibold">Country of Origin</span>
+            <p>{countryName}</p>
           </div>
           <div>
             <span className="font-semibold">Type</span>
             <p>{product.type ? product.type.value : "-"}</p>
           </div>
+          {categories && categories.length > 0 && (
+            <div>
+              <span className="font-semibold">Category</span>
+              <p>{categories.map((c) => c.name).join(", ")}</p>
+            </div>
+          )}
         </div>
         <div className="flex flex-col gap-y-4">
           <div>
@@ -72,6 +98,21 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
                 : "-"}
             </p>
           </div>
+          {tags && tags.length > 0 && (
+            <div>
+              <span className="font-semibold">Tags</span>
+              <div className="flex flex-wrap gap-1 mt-1">
+                {tags.map((t) => (
+                  <span
+                    key={t.value}
+                    className="inline-block px-2 py-0.5 text-xs rounded-full bg-ui-bg-subtle text-ui-fg-subtle"
+                  >
+                    {t.value}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
