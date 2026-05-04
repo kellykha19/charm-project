@@ -85,16 +85,19 @@ export default async function PaginatedProducts({
     return null
   }
 
+  const hasFilters = filters && Object.values(filters).some((v) => v)
+
+  const fetchLimit = hasFilters ? 500 : 100
+
   let {
     response: { products: allProducts },
   } = await getProductsListWithSort({
     page: 1,
-    queryParams: { ...queryParams, limit: 100 },
+    queryParams: { ...queryParams, limit: fetchLimit },
     sortBy,
     countryCode,
   })
 
-  const hasFilters = filters && Object.values(filters).some((v) => v)
   const filtered = hasFilters
     ? allProducts.filter((p) => matchesFilter(p, filters!))
     : allProducts

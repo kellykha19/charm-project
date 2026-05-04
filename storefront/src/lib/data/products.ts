@@ -70,7 +70,7 @@ export const getProductsList = cache(async function ({
         limit,
         offset,
         region_id: region.id,
-        fields: "*variants.calculated_price",
+        fields: "*variants.calculated_price,+metadata",
         ...queryParams,
       },
       { next: { tags: ["products"] } }
@@ -109,6 +109,7 @@ export const getProductsListWithSort = cache(async function ({
   queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductParams
 }> {
   const limit = queryParams?.limit || 12
+  const fetchLimit = Math.max(limit, 100)
 
   const {
     response: { products, count },
@@ -116,7 +117,7 @@ export const getProductsListWithSort = cache(async function ({
     pageParam: 0,
     queryParams: {
       ...queryParams,
-      limit: 100,
+      limit: fetchLimit,
     },
     countryCode,
   })
