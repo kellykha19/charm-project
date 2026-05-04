@@ -63,6 +63,13 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         return res.json({ action, ...result })
       }
 
+      case "push-product": {
+        const { product } = req.body as { product: any }
+        if (!product) return res.status(400).json({ error: "Provide 'product' object" })
+        const result = await sync.pushProduct(product)
+        return res.json({ action, product: { id: result?.product?.id, title: result?.product?.title } })
+      }
+
       case "get-products": {
         const products = await sync.getProducts()
         return res.json({
