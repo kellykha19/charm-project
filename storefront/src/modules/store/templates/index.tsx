@@ -10,13 +10,24 @@ const StoreTemplate = ({
   sortBy,
   page,
   countryCode,
+  searchParams,
 }: {
   sortBy?: SortOptions
   page?: string
   countryCode: string
+  searchParams?: Record<string, string | undefined>
 }) => {
   const pageNumber = page ? parseInt(page) : 1
   const sort = sortBy || "created_at"
+
+  const filters = {
+    color: searchParams?.color || "",
+    style: searchParams?.style || "",
+    themes: searchParams?.themes || "",
+    franchise: searchParams?.franchise || "",
+    has_stones: searchParams?.has_stones || "",
+    enamel: searchParams?.enamel || "",
+  }
 
   return (
     <div
@@ -33,6 +44,7 @@ const StoreTemplate = ({
             sortBy={sort}
             page={pageNumber}
             countryCode={countryCode}
+            filters={filters}
           />
         </Suspense>
       </div>
